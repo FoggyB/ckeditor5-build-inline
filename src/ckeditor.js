@@ -28,6 +28,11 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+// -- Custom --
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import Font from '@ckeditor/ckeditor5-font/src/font';
+// import LineHeight from 'ckeditor5-line-height/src/lineheight';
+import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 
 export default class InlineEditor extends InlineEditorBase {}
 
@@ -54,7 +59,12 @@ InlineEditor.builtinPlugins = [
 	Paragraph,
 	PasteFromOffice,
 	Table,
-	TableToolbar
+	TableToolbar,
+	// -- Custom --
+	Alignment,
+	Font,
+	// LineHeight,
+	SimpleUploadAdapter
 ];
 
 // Editor configuration.
@@ -65,27 +75,42 @@ InlineEditor.defaultConfig = {
 			'|',
 			'bold',
 			'italic',
-			'link',
+			'fontSize',
+			'fontColor',
+			// 'lineHeight',
+			'alignment',
+			// 'alignment:left',
+			// 'alignment:center',
+			// 'alignment:right',
 			'bulletedList',
 			'numberedList',
 			'|',
 			'indent',
 			'outdent',
-			'|',
-			'imageUpload',
 			'blockQuote',
-			'insertTable',
-			'mediaEmbed',
+			'|',
+			'link',
+			'imageUpload',
+			// 'insertTable',
+			// 'mediaEmbed',
+			'|',
 			'undo',
 			'redo'
 		]
 	},
 	image: {
 		toolbar: [
-			'imageStyle:full',
-			'imageStyle:side',
+			'imageTextAlternative',
 			'|',
-			'imageTextAlternative'
+			'imageStyle:alignLeft',
+			// 'imageStyle:side',
+			'imageStyle:full',
+			'imageStyle:alignRight',
+		],
+		styles: [
+			'full',
+			'alignLeft',
+			'alignRight',
 		]
 	},
 	table: {
@@ -96,5 +121,6 @@ InlineEditor.defaultConfig = {
 		]
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en'
+	language: 'en',
+	ignoreEmptyParagraph: true,
 };
